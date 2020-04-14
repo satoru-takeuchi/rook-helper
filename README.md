@@ -40,3 +40,17 @@ You can watch the pods of the Rook/Ceph cluster with the following command.
 ```console
 ./watchpods.sh
 ```
+
+# Trouble shooting
+
+If you saw the following error message when executing `./init.sh`, it means there is an old K8s cluster.
+
+```console
+ERROR: node(s) already exist for a cluster with the name "kind"
+```
+
+You can remove the old cluster by the following command.
+
+```console
+kind delete cluster
+```
