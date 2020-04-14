@@ -88,7 +88,7 @@ spec:
     workers: 0
   # enable the crash collector for ceph daemon crash collection
   crashCollector:
-    disable: false
+    disable: true
   cleanupPolicy:
     # cleanupPolicy should only be added to the cluster when the cluster is about to be deleted.
     # After any field of the cleanup policy is set, Rook will stop configuring the cluster as if the cluster is about
