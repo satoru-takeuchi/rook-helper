@@ -16,7 +16,7 @@ The following tools should be installed.
 - kind
 - jq
 - kubectl
-- sgdisk
+- gdisk
 
 There should be the scratch device `/dev/sdb` for a OSD. If you want to change the scratch device name, you should modify scripts by yourself.
 
