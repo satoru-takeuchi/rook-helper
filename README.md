@@ -3,7 +3,10 @@ A simple Rook/Ceph cluster constructor for testing.
 It provides the following features.
 
 - Creates a simple K8s cluster and a Rook/Ceph cluster on that K8s cluster.
+  - Doesn't focus on external cluster, EC, and OpenShift related configurations.
 - Destroy the above-mentioned cluster.
+
+The target version is Rook v1.3.2.
 
 # Usage
 
