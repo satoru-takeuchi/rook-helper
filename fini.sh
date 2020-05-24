@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash -x
 
 kubectl delete -f manifests/cluster.yaml
 while : ; do
