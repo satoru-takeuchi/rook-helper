@@ -164,8 +164,8 @@ spec:
 # nodes below will be used as storage resources.  Each node's 'name' field should match their 'kubernetes.io/hostname' label.
     nodes:
     - name: "kind-control-plane"
-      devices: # specific devices to use for storage can be specified for each node
-      - name: "sdb"
+#      devices: # specific devices to use for storage can be specified for each node
+#      - name: "sdb1"
 #      - name: "nvme01" # multiple osds can be created on high performance devices
 #        config:
 #          osdsPerDevice: "5"
@@ -173,5 +173,5 @@ spec:
 #      config: # configuration can be specified at the node level which overrides the cluster level config
 #        storeType: filestore
 #    - name: "172.17.4.301"
-#      deviceFilter: "^sd."
+      devicePathFilter: "/dev/disk/by-partlabel/CEPH_DATA"
   # The section for configuring management of daemon disruptions during upgrade or fencing.
