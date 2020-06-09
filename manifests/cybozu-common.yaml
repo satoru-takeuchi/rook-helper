@@ -10,13 +10,13 @@
 # Most of the sections are prefixed with a 'OLM' keyword which is used to build our CSV for an OLM (Operator Life Cycle manager)
 ###################################################################################################################
 
-# Namespace where the operator and other rook resources are created
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: rook-ceph
-# OLM: BEGIN CEPH CRD
-# The CRD declarations
+# # Namespace where the operator and other rook resources are created
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: rook-ceph
+# # OLM: BEGIN CEPH CRD
+# # The CRD declarations
 ---
 apiVersion: apiextensions.k8s.io/v1beta1
 kind: CustomResourceDefinition
@@ -122,7 +122,7 @@ spec:
                             type: string
                           storeType:
                             type: string
-                            pattern: ^(bluestore)$
+                            pattern: ^(filestore|bluestore)$
                           databaseSizeMB:
                             type: string
                           walSizeMB:
@@ -163,6 +163,10 @@ spec:
                   type: boolean
                 rulesNamespace:
                   type: string
+            rbdMirroring:
+              properties:
+                workers:
+                  type: integer
             removeOSDsIfOutAndSafeToRemove:
               type: boolean
             external:
@@ -171,13 +175,14 @@ spec:
                   type: boolean
             cleanupPolicy:
               properties:
-                confirmation:
+                deleteDataDirOnHosts:
                   type: string
                   pattern: ^$|^yes-really-destroy-data$
             placement: {}
             resources: {}
-  subresources:
-    status: {}
+  # somehow this is breaking the status, but let's keep this here so we don't forget it once we move to controller-runtime
+  # subresources:
+  #   status: {}
   additionalPrinterColumns:
     - name: DataDirHostPath
       type: string
@@ -228,33 +233,6 @@ spec:
   subresources:
     status: {}
 # OLM: END CEPH CLIENT CRD
-# OLM: BEGIN CEPH RBD MIRROR CRD
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  name: cephrbdmirrors.ceph.rook.io
-spec:
-  group: ceph.rook.io
-  names:
-    kind: CephRBDMirror
-    listKind: CephRBDMirrorList
-    plural: cephrbdmirrors
-    singular: cephrbdmirror
-  scope: Namespaced
-  version: v1
-  validation:
-    openAPIV3Schema:
-      properties:
-        spec:
-          properties:
-            count:
-              type: integer
-              minimum: 1
-              maximum: 100
-  subresources:
-    status: {}
-# OLM: END CEPH RBD MIRROR CRD
 # OLM: BEGIN CEPH FS CRD
 ---
 apiVersion: apiextensions.k8s.io/v1beta1
@@ -442,8 +420,6 @@ spec:
                   properties:
                     size:
                       type: integer
-                    requireSafeReplicaSize:
-                      type: boolean
                 erasureCoded:
                   properties:
                     dataChunks:
@@ -466,8 +442,6 @@ spec:
                   properties:
                     size:
                       type: integer
-                    requireSafeReplicaSize:
-                      type: boolean
                 erasureCoded:
                   properties:
                     dataChunks:
@@ -1253,12 +1227,7 @@ subjects:
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
 metadata:
-  # Note: Kubernetes matches PSPs to deployments alphabetically. In some environments, this PSP may
-  # need to be renamed with a value that will match before others.
-  name: 00-rook-privileged
-  annotations:
-    seccomp.security.alpha.kubernetes.io/allowedProfileNames: 'runtime/default'
-    seccomp.security.alpha.kubernetes.io/defaultProfileName:  'runtime/default'
+  name: rook-privileged
 spec:
   privileged: true
   allowedCapabilities:
@@ -1288,6 +1257,7 @@ spec:
     - hostPath
     - flexVolume
   # allowedHostPaths can be set to Rook's known host volume mount points when they are fully-known
+  # directory-based OSDs make this hard to nail down
   # allowedHostPaths:
   #   - pathPrefix: "/run/udev"  # for OSD prep
   #     readOnly: false
@@ -1333,7 +1303,7 @@ rules:
     resources:
       - podsecuritypolicies
     resourceNames:
-      - 00-rook-privileged
+      - rook-privileged
     verbs:
       - use
 ---
