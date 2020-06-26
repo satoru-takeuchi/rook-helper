@@ -35,6 +35,9 @@ cd ${GOPTH}/src/github.com/rook/rook
 ./ci-init.sh
 ```
 
+If you want to prepare your Rook cluster by yourself, please remove the last
+two lines of ci-init.sh. Then this script just creates K8s cluster.
+
 ## Destroy both the Rook/Ceph cluster and the K8s cluster
 
 ```console
