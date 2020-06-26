@@ -1,0 +1,31 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: manual
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: local-osd
+  labels:
+    type: local-osd
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Block
+  local:
+    path: /dev/sdb
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - kind-control-plane
