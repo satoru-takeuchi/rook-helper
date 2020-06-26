@@ -12,4 +12,3 @@ export PATH="/tmp/rook-tests-scripts-helm/linux-amd64:$PATH" \
     STORAGE_PROVIDER_TESTS=ceph \
     TEST_SCRATCH_DEVICE=/dev/sdb
 _output/tests/linux_amd64/integration -test.v -test.timeout 7200s -test.run 'TestCephMultiClusterDeploySuite' 2>&1 | tee _output/tests/integrationTests.log
-
