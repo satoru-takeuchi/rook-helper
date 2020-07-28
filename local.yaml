@@ -14,7 +14,7 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 10Gi
+    storage: 5Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
@@ -28,4 +28,4 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - kind-control-plane
+          - neco-dev
