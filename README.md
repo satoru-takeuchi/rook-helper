@@ -1,11 +1,11 @@
-A simple Rook/Ceph cluster constructor for testing.
+A simple scripts and manifests to create a simple Rook/Ceph cluster
 
 It provides the following features.
 
 - Creates a simple K8s cluster for the CI of Rook/Ceph
 - Destroy the above-mentioned cluster.
 
-The target version is Rook v1.3.6.
+The target version is Rook upstream/master: 14d4ed447ece23ec901bf39af2051601f82616f2
 
 # Usage
 
@@ -18,7 +18,6 @@ The following tools should be installed.
 - kubectl
 
 There should be the scratch device `/dev/sdb` for a OSD. If you want to change the scratch device name, you should modify scripts by yourself.
-
 
 ## Preparation
 
