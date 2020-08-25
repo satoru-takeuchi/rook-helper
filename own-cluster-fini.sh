@@ -8,11 +8,10 @@ export KUBECONFIG=$HOME/admin.conf \
     TEST_SCRATCH_DEVICE=/dev/sdb \
     KUBE_VERSION=v1.18.3
 
-kubectl delete -f cluster-on-pvc.yaml
-kubectl delete -f operator.yaml
-kubectl delete -f common.yaml
+#kubectl delete -f cluster-on-pvc.yaml
+#kubectl delete -f operator.yaml
+#kubectl delete -f common.yaml
 kubectl delete -f local.yaml
-tests/scripts/helm.sh clean
 tests/scripts/kubeadm.sh clean
 sudo rm -rf /var/lib/etcd
 sudo rm -rf /etc/kubernetes
