@@ -17,7 +17,7 @@ There should be the scratch device `/dev/sdb` for a OSD. If you want to change t
 Copy scripts to the test environment.
 
 ```console
-cp ci-* ${GOPATH}/src/github.com/rook/rook
+cp *.sh ${GOPATH}/src/github.com/rook/rook
 cd $_
 ```
 
@@ -33,6 +33,12 @@ make -j$(grep -c processor) IMAGES=ceph
 
 ```console
 ./ci-init.sh
+```
+
+If you want to operate the created K8s cluster, you should run the following command beforehand.
+
+```console
+export KUBECONFIG=~/admin.conf
 ```
 
 3. Both the Rook/Ceph cluster and k8s cluster can be destroyed with the following command.
@@ -53,6 +59,7 @@ make -j$(grep -c processor) IMAGES=ceph
 
 ```console
 ./own-cluster-init.sh
+export KUBECONFIG=~/admin.conf
 ```
 
 5. Apply Rook manifests like the followings.
