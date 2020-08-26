@@ -1,11 +1,4 @@
-A simple scripts and manifests to create a simple Rook/Ceph cluster
-
-It provides the following features.
-
-- Run the integration test of Rook/Ceph
-- Destroy the above-mentioned cluster.
-
-The target version is Rook upstream/master: 14d4ed447ece23ec901bf39af2051601f82616f2
+A helper script to run the integration test of Rook and launch arbitrary Rook cluster.
 
 # Usage
 
@@ -48,7 +41,7 @@ make -j$(grep -c processor) IMAGES=ceph
 ./ci-fini.sh
 ```
 
-## Prepare a k8s cluster to run your test
+## Prepare a k8s cluster to run arbitrary Rook clsuter
 
 1. Create your Rook operator image.
 
@@ -70,7 +63,7 @@ kubectl apply -f operator.yaml
 kubectl apply -f cluster.yaml
 ```
 
-6. Run your tests
+6. Use the Rook cluster as you like
 
 7. Destroy both the Rook cluster and the K8s cluster as follows.
 
