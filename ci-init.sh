@@ -6,9 +6,7 @@ export KUBECONFIG=$HOME/admin.conf \
 tests/scripts/kubeadm.sh up
 tests/scripts/helm.sh up
 
-export PATH="/tmp/rook-tests-scripts-helm/linux-amd64:$PATH" \
-    TEST_HELM_PATH=/tmp/rook-tests-scripts-helm/linux-amd64/helm \
-    TEST_BASE_DIR="$(pwd)" \
+export TEST_BASE_DIR=WORKING_DIR \
     STORAGE_PROVIDER_TESTS=ceph \
     TEST_IS_OFFICIAL_BUILD=false \
     TEST_SCRATCH_DEVICE=/dev/sdb
