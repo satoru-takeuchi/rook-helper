@@ -70,6 +70,7 @@ export KUBECONFIG=~/admin.conf
 
 ```console
 kubectl apply -f common.yaml
+kubectl apply -f crds.yaml
 kubectl apply -f operator.yaml
 kubectl apply -f cluster.yaml
 ```
@@ -81,6 +82,7 @@ kubectl apply -f cluster.yaml
 ```
 kubectl delete -f cluster.yaml
 kubectl delete -f operator.yaml
+kubectl delete -f crds.yaml
 kubectl delete -f common.yaml
 ./own-cluster-fini.sh
 ```
