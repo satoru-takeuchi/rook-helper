@@ -1,15 +1,14 @@
 #!/bin/bash -x
 
 export KUBECONFIG=$HOME/admin.conf \
-    PATH="/tmp/rook-tests-scripts-helm/linux-amd64:$PATH" \
-    TEST_HELM_PATH=/tmp/rook-tests-scripts-helm/linux-amd64/helm \
     TEST_BASE_DIR="$(pwd)" \
     STORAGE_PROVIDER_TESTS=ceph \
     TEST_SCRATCH_DEVICE=/dev/sdb \
-    KUBE_VERSION=v1.18.3
+    KUBE_VERSION=v1.19.2
 
 #kubectl delete -f cluster-on-pvc.yaml
 #kubectl delete -f operator.yaml
+#kubectl delete -f crds.yaml
 #kubectl delete -f common.yaml
 kubectl delete -f local.yaml
 tests/scripts/kubeadm.sh clean

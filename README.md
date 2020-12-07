@@ -1,5 +1,9 @@
 A helper script to run the integration test of Rook and launch arbitrary Rook cluster.
 
+# supported versions
+
+- v1.5.3 or later
+
 # Usage
 
 ## Prerequisite
@@ -51,7 +55,7 @@ export KUBECONFIG=~/admin.conf
 
 1. Create your Rook operator image.
 
-2. Prepare your Rook manifests, typically common.yaml, operator.yaml, and cluster.yaml
+2. Prepare your Rook manifests, typically common.yaml, crds.yaml, operator.yaml, and cluster.yaml
 
 3. Modify operator.yaml to use your operator image.
 
