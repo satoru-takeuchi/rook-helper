@@ -1,9 +1,6 @@
 #!/bin/bash -x
 
 export KUBECONFIG=$HOME/admin.conf \
-    TEST_BASE_DIR="$(pwd)" \
-    STORAGE_PROVIDER_TESTS=ceph \
-    TEST_SCRATCH_DEVICE=/dev/sdb \
     KUBE_VERSION=v1.19.2
 
 #kubectl delete -f cluster-on-pvc.yaml

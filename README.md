@@ -30,7 +30,7 @@ cd $_
 1. Ceate your Rook operator image with the following command.
 
 ```console
-make -j$(grep -c processor) IMAGES=ceph
+make -j$(grep -c processor /proc/cpuinfo) IMAGES=ceph
 ```
 
 2. Run the following command.
