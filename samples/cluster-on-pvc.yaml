@@ -9,7 +9,7 @@ spec:
     count: 1
     allowMultiplePerNode: false
   cephVersion:
-    image: ceph/ceph:v15.2.5
+    image: ceph/ceph:v15.2.7
     allowUnsupported: false
   skipUpgradeChecks: false
   continueUpgradeAfterChecksEvenIfNotHealthy: false

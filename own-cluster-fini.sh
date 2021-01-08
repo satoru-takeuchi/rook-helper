@@ -1,9 +1,11 @@
 #!/bin/bash -x
 
-export KUBECONFIG=$HOME/admin.conf
+export KUBECONFIG=$HOME/admin.conf \
+    KUBE_VERSION=v1.19.2
 
 #kubectl delete -f cluster-on-pvc.yaml
 #kubectl delete -f operator.yaml
+#kubectl delete -f crds.yaml
 #kubectl delete -f common.yaml
 kubectl delete -f local.yaml
 tests/scripts/kubeadm.sh clean
