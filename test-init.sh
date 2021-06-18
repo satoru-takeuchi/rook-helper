@@ -19,7 +19,7 @@ done
 kubectl apply -f local.yaml
 #kubectl apply -f local2.yaml
 kubectl apply -f cluster-on-pvc.yaml
-#kubectl apply -f cluster/examples/kubernetes/ceph/toolbox.yaml
+kubectl apply -f cluster/examples/kubernetes/ceph/toolbox.yaml
 kubectl -n rook-ceph get pod -w
 
 #TOOLBOXPOD=$(kubectl -n rook-ceph get pod -lapp=rook-ceph-tools -o jsonpath='{.items[0].metadata.name}')
