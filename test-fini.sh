@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export KUBECONFIG=~/admin.conf
+. config.sh
 
 kubectl delete -f cluster-on-pvc.yaml
 #kubectl delete -f local2.yaml

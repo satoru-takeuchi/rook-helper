@@ -8,7 +8,9 @@
 #COMMIT=$1
 
 #git checkout $COMMIT
-export KUBECONFIG=~/admin.conf
+
+. config.sh
+
 #make -j8 IMAGES=ceph
 #docker tag build-e388186c/ceph-amd64 rook/ceph:master
 

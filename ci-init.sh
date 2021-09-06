@@ -1,7 +1,6 @@
 #!/bin/bash
 
-export KUBECONFIG=$HOME/admin.conf \
-    KUBE_VERSION=v1.21.4
+. config.sh
 
 tests/scripts/kubeadm.sh up
 tests/scripts/helm.sh up

@@ -1,7 +1,6 @@
 #!/bin/bash -x
 
-export KUBECONFIG=$HOME/admin.conf \
-    KUBE_VERSION=v1.21.4
+. config.sh
 
 #kubectl delete -f cluster-on-pvc.yaml
 #kubectl delete -f operator.yaml
