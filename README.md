@@ -1,14 +1,14 @@
 A helper script to run the integration test of Rook and launch arbitrary Rook cluster.
 
-# supported versions
+# supported Rook versions
 
-- v1.5.3 or later
+- v1.7.2 or later
 
 # Usage
 
 ## Prerequisite
 
-This programs is only tests in Ubuntu 18.04 environment.
+This programs is only tests in Ubuntu 20.04 environment.
 
 The following tools should be installed.
 
