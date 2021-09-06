@@ -9,13 +9,12 @@ spec:
     count: 1
     allowMultiplePerNode: false
   cephVersion:
-    image: ceph/ceph:v15.2.7
+    image: ceph/ceph:v16.2.4
     allowUnsupported: false
   skipUpgradeChecks: false
   continueUpgradeAfterChecksEvenIfNotHealthy: false
   dashboard:
     enabled: false
-    ssl: true
   network:
     hostNetwork: false
   crashCollector:

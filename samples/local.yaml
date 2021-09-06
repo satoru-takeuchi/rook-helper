@@ -28,4 +28,4 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - neco-dev
+          - ubuntu2004
