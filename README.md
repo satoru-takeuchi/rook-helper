@@ -15,7 +15,7 @@ The following tools should be installed.
 - kubectl
 - kubeadm
 
-There should be scratch devices for OSDs. Bu default, "/dev/sdb" is used. Change "DEVICES" parameter in "config.sh" if necessary.
+There should be scratch devices for OSDs. By default("cluster-test.yaml"), Rook consumes all scratch devices for OSDs.
 
 ## installation
 
@@ -54,6 +54,18 @@ If you want to destroy your cluster, run the following script.
 
 ```console
 ./cluster-fini.sh
+```
+
+Then wipe all devices used for OSDs.
+
+```console
+./cleanup-devices <devices>
+```
+
+If "/dev/sdb" and "/dev/sdc" were consumed by Rook, run this script as follows.
+
+```console
+./cleanup-devices /dev/sdb /dev/sdc
 ```
 
 Delete the Rook operator.
