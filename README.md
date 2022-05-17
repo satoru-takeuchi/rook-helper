@@ -2,7 +2,7 @@ A helper script to run the integration test of Rook and launch arbitrary Rook cl
 
 # supported Rook versions
 
-- v1.7.2 or later
+- v1.9.3 or later
 
 # Usage
 
@@ -13,8 +13,9 @@ This programs is only tests in Ubuntu 20.04 environment.
 The following tools should be installed.
 
 - kubectl
+- kubeadm
 
-There should be the scratch device `/dev/sdb` for a OSD. If you want to change the scratch device name, you should modify scripts by yourself.
+There should be scratch devices for OSDs. Bu default, "/dev/sdb" is used. Change "DEVICES" parameter in "config.sh" if necessary.
 
 ## installation
 
@@ -25,64 +26,44 @@ cp *.sh ${GOPATH}/src/github.com/rook/rook
 cd $_
 ```
 
-## Run the integration test
+## Usage
 
-1. Ceate your Rook operator image with the following command.
-
-```console
-make -j$(grep -c processor /proc/cpuinfo) IMAGES=ceph
-```
-
-2. Run the following command.
+Deploy a K8s cluster.
 
 ```console
-./ci-init.sh
+./k8s-cluster-init.sh
 ```
 
-If you want to operate the created K8s cluster, you should run the following command beforehand.
+Deploy a Rook operator.
 
 ```console
-export KUBECONFIG=~/admin.conf
+./operator-init.sh
 ```
 
-3. Both the Rook/Ceph cluster and k8s cluster can be destroyed with the following command.
+Deploy a Rook cluster.
 
 ```console
-./ci-fini.sh
+./cluster-init.sh
 ```
 
-## Prepare a k8s cluster to run arbitrary Rook clsuter
+Now you can ready to use your Rook cluster.
 
-1. Create your Rook operator image.
+## Cleanup
 
-2. Prepare your Rook manifests, typically common.yaml, crds.yaml, operator.yaml, and cluster.yaml
-
-3. Modify operator.yaml to use your operator image.
-
-4. Run the following command to a K8s cluster.
+If you want to destroy your cluster, run the following script.
 
 ```console
-./own-cluster-init.sh
-export KUBECONFIG=~/admin.conf
+./cluster-fini.sh
 ```
 
-5. Apply Rook manifests like the followings.
+Delete the Rook operator.
 
 ```console
-kubectl apply -f common.yaml
-kubectl apply -f crds.yaml
-kubectl apply -f operator.yaml
-kubectl apply -f cluster.yaml
+./operator-fini.sh
 ```
 
-6. Use the Rook cluster as you like
+Delete the K8s cluster.
 
-7. Destroy both the Rook cluster and the K8s cluster as follows.
-
-```
-kubectl delete -f cluster.yaml
-kubectl delete -f operator.yaml
-kubectl delete -f crds.yaml
-kubectl delete -f common.yaml
-./own-cluster-fini.sh
+```console
+./k8s-cluster-fini.sh
 ```
