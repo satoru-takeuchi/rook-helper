@@ -2,7 +2,7 @@ A helper script to run the integration test of Rook and launch arbitrary Rook cl
 
 # supported software versions
 
-- rook: v1.9.3 or later
+- rook: v1.10.7 or later
 - kubeadm: v1.25.3 or later
 
 # Usage

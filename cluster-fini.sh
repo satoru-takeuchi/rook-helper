@@ -2,6 +2,8 @@
 
 . config.sh
 
+kubectl -n rook-ceph patch cephcluster my-cluster --type merge -p '{"spec":{"cleanupPolicy":{"confirmation":"yes-really-destroy-data"}}}'
+
 kubectl delete -f $OPERATOR_DIR/toolbox.yaml
 kubectl delete -f $CLUSTER_CR
 
