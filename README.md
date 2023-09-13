@@ -9,7 +9,7 @@ A helper script to run the integration test of Rook and launch arbitrary Rook cl
 
 ## Prerequisite
 
-This programs is only tests in Ubuntu 20.04 environment.
+This programs is only tests in Ubuntu 22.04 environment.
 
 The following tools should be installed.
 
