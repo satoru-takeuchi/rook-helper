@@ -2,4 +2,4 @@
 
 . config.sh
 
-sudo kubeadm reset
+minikube delete

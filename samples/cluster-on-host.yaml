@@ -6,7 +6,7 @@ metadata:
 spec:
   dataDirHostPath: /var/lib/rook
   cephVersion:
-    image: quay.io/ceph/ceph:v17.2.6
+    image: quay.io/ceph/ceph:v18.2.1
     allowUnsupported: true
   mon:
     count: 1
@@ -17,19 +17,18 @@ spec:
   dashboard:
     enabled: false
   crashCollector:
-    disable: true
+    disable: false
   storage:
-    useAllNodes: true
+    useAllNodes: false
     useAllDevices: false
-    devices:
-      - name: /dev/sdb
+    nodes:
+      - name: coffee
+        devices:
+          - name: /dev/sdb
+  monitoring:
+    enabled: false
   healthCheck:
     daemonHealth:
       mon:
         interval: 45s
         timeout: 600s
-  priorityClassNames:
-    all: system-node-critical
-    mgr: system-cluster-critical
-  disruptionManagement:
-    managePodBudgets: true

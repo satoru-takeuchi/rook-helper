@@ -1,55 +1,99 @@
+kind: StorageClass
+apiVersion: storage.k8s.io/v1
+metadata:
+  name: manual
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: local-osd
+  labels:
+    type: local-osd
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Block
+  local:
+    path: /dev/sdb
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - coffee # Please change this to your node
+---
 apiVersion: ceph.rook.io/v1
 kind: CephCluster
 metadata:
   name: rook-ceph
-  namespace: rook-ceph
+  namespace: rook-ceph # namespace:cluster
 spec:
   dataDirHostPath: /var/lib/rook
   mon:
     count: 1
     allowMultiplePerNode: false
   cephVersion:
-    image: ceph/ceph:v17.2.6
+    image: quay.io/ceph/ceph:v18.2.1
     allowUnsupported: false
   skipUpgradeChecks: false
   continueUpgradeAfterChecksEvenIfNotHealthy: false
+  mgr:
+    count: 1
   dashboard:
     enabled: false
-  network:
-    hostNetwork: false
   crashCollector:
     disable: true
   storage:
     storageClassDeviceSets:
-    - name: set1
-      count: 1
-      portable: false
-      tuneSlowDeviceClass: true
-      placement:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
+      - name: set1
+        count: 1
+        portable: false
+        encrypted: false
+        placement:
+          topologySpreadConstraints:
+            - maxSkew: 1
+              topologyKey: kubernetes.io/hostname
+              whenUnsatisfiable: ScheduleAnyway
               labelSelector:
                 matchExpressions:
-                - key: app
-                  operator: In
-                  values:
-                  - rook-ceph-osd
-                - key: app
-                  operator: In
-                  values:
-                  - rook-ceph-osd-prepare
-              topologyKey: kubernetes.io/hostname
-      resources:
-      volumeClaimTemplates:
-      - metadata:
-          name: data
-        spec:
-          resources:
-            requests:
-              storage: 5Gi
-          storageClassName: manual
-          volumeMode: Block
-          accessModes:
-            - ReadWriteOnce
+                  - key: app
+                    operator: In
+                    values:
+                      - rook-ceph-osd
+                      - rook-ceph-osd-prepare
+        preparePlacement:
+          podAntiAffinity:
+            preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                      - key: app
+                        operator: In
+                        values:
+                          - rook-ceph-osd
+                      - key: app
+                        operator: In
+                        values:
+                          - rook-ceph-osd-prepare
+                  topologyKey: kubernetes.io/hostname
+        volumeClaimTemplates:
+          - metadata:
+              name: data
+            spec:
+              resources:
+                requests:
+                  storage: 5Gi
+              storageClassName: manual
+              volumeMode: Block
+              accessModes:
+                - ReadWriteOnce
+    onlyApplyOSDPlacement: false
