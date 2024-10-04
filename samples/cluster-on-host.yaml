@@ -6,7 +6,7 @@ metadata:
 spec:
   dataDirHostPath: /var/lib/rook
   cephVersion:
-    image: quay.io/ceph/ceph:v18.2.1
+    image: quay.io/ceph/ceph:v18.2.4
     allowUnsupported: true
   mon:
     count: 1
@@ -22,9 +22,9 @@ spec:
     useAllNodes: false
     useAllDevices: false
     nodes:
-      - name: coffee
+      - name: minikube
         devices:
-          - name: /dev/sdb
+          - name: /dev/vdb
   monitoring:
     enabled: false
   healthCheck:

@@ -1,21 +1,21 @@
 A helper script to run the integration test of Rook and launch arbitrary Rook cluster.
 
-# supported software versions
+# supported Rook versions
 
-- rook: v1.13.2 or later
-- minikube: v1.6.24 or later
+v1.15.2 or later
 
 # Usage
 
 ## Prerequisite
 
-This programs is only tests in Ubuntu 22.04 environment.
+This programs is only tests in Ubuntu 24.04 environment.
 
 The following tools should be installed.
 
 - kubectl
-- minikube
-- containerd
+- minikube: v1.7.24 or later
+- libvirt0
+- qemu-system-x86
 
 There should be scratch devices for OSDs. By default("cluster-test.yaml"), Rook consumes all scratch devices for OSDs.
 

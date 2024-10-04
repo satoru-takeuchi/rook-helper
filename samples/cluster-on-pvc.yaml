@@ -20,7 +20,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   volumeMode: Block
   local:
-    path: /dev/sdb
+    path: /dev/vdb
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -28,7 +28,7 @@ spec:
         - key: kubernetes.io/hostname
           operator: In
           values:
-          - coffee # Please change this to your node
+          - minikube
 ---
 apiVersion: ceph.rook.io/v1
 kind: CephCluster
@@ -41,7 +41,7 @@ spec:
     count: 1
     allowMultiplePerNode: false
   cephVersion:
-    image: quay.io/ceph/ceph:v18.2.1
+    image: quay.io/ceph/ceph:v18.2.4
     allowUnsupported: false
   skipUpgradeChecks: false
   continueUpgradeAfterChecksEvenIfNotHealthy: false

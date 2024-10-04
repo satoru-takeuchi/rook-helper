@@ -1,2 +1,2 @@
-export OPERATOR_DIR=deploy/examples
-export CLUSTER_CR=samples/cluster-on-host.yaml
+export OPERATOR_DIR=<your-rook-path>/deploy/examples
+export CLUSTER_CR=samples/cluster-on-pvc.yaml

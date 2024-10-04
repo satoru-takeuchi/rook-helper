@@ -2,4 +2,4 @@
 
 . config.sh
 
-minikube start --driver=none --container-runtime=containerd
+minikube start --driver=kvm2 --extra-disks 2
