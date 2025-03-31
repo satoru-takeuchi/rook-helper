@@ -58,18 +58,6 @@ If you want to destroy your cluster, run the following script.
 ./cluster-fini.sh
 ```
 
-Then wipe all devices used for OSDs.
-
-```console
-./cleanup-devices <devices>
-```
-
-If "/dev/sdb" and "/dev/sdc" were consumed by Rook, run this script as follows.
-
-```console
-./cleanup-devices /dev/sdb /dev/sdc
-```
-
 Delete the Rook operator.
 
 ```console
