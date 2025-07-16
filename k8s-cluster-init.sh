@@ -2,4 +2,4 @@
 
 . config.sh
 
-minikube start --driver=kvm2 --extra-disks 2
+minikube start --driver=kvm2 --extra-disks 2 $@
