@@ -1,8 +1,8 @@
 A helper script to run the integration test of Rook and launch arbitrary Rook cluster.
 
-# supported Rook versions
+# tested Rook versions
 
-v1.15.2 or later
+- v1.17.6
 
 # Usage
 
