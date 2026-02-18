@@ -18,4 +18,9 @@ for i in common crds operator ; do
   kubectl apply -f $OPERATOR_DIR/${i}.yaml
 done
 
+CSI_OPERATOR_MANIFEST=$OPERATOR_DIR/csi-operator.yaml
+if [ -e ${CSI_OPERATOR_MANIFEST} ] ; then
+  kubectl apply -f ${CSI_OPERATOR_MANIFEST}
+fi
+
 watch kubectl -n rook-ceph get pod
