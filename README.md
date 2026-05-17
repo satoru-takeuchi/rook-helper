@@ -1,21 +1,21 @@
 A helper script to run the integration test of Rook and launch arbitrary Rook cluster.
 
-# tested Rook versions
+# supported Rook versions
 
-- v1.17.6
+v1.19.5 or later
 
 # Usage
 
 ## Prerequisite
 
-This programs is only tests in Ubuntu 24.04 environment.
+This programs is only tests in the following environment:
 
-The following tools should be installed.
-
-- kubectl
-- minikube: v1.7.24 or later
-- libvirt0
-- qemu-system-x86
+- Ubuntu 24.04.05
+- deb packages
+  - kubectl v1.36.1
+  - minikube: v1.35.0
+  - libvirt0
+  - qemu-system-x86
 
 There should be scratch devices for OSDs. By default("cluster-test.yaml"), Rook consumes all scratch devices for OSDs.
 
@@ -56,6 +56,18 @@ If you want to destroy your cluster, run the following script.
 
 ```console
 ./cluster-fini.sh
+```
+
+Then wipe all devices used for OSDs.
+
+```console
+./cleanup-devices <devices>
+```
+
+If "/dev/sdb" and "/dev/sdc" were consumed by Rook, run this script as follows.
+
+```console
+./cleanup-devices /dev/sdb /dev/sdc
 ```
 
 Delete the Rook operator.

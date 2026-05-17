@@ -14,7 +14,7 @@
 #make -j8 IMAGES=ceph
 #docker tag build-e388186c/ceph-amd64 rook/ceph:master
 
-for i in common crds operator ; do
+for i in common crds operator csi-operator ; do
   kubectl apply -f $OPERATOR_DIR/${i}.yaml
 done
 
